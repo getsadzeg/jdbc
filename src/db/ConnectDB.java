@@ -99,6 +99,23 @@ public class ConnectDB {
         }
         return RESULT;
     }
+    public void displayData() {
+        try {
+            while(rst.next()) {
+                String name = rst.getString("Name");
+                String surname = rst.getString("Surname");
+                String ID = rst.getString("ID");
+                String phoneNumber = rst.getString("phoneNumber");
+                String Password = rst.getString("Password");
+                System.out.println(name + " " + surname + " " + ID + " " + phoneNumber + " " + Password);
+                
+            }
+        }
+        catch(SQLException ex) {
+            System.out.println("something blew up while displaying data");
+            ex.printStackTrace();
+        }
+    }
 
     }
     

@@ -9,8 +9,12 @@ public class Main {
         ConnectDB db = new ConnectDB("jdbc:mysql://192.168.1.2:3306", "root", "root");
         System.out.println(db.openConnection());
         
-        System.out.println(db.runStatement("SELECT Id, Name, Status, Message, Longitude, Latitude FROM areyoual_army.soldiers"));
+        System.out.println(db.runStatement("SELECT Name, Surname, ID, phoneNumber, Password FROM lake.users"));
+        
+        db.displayData(); //displayed successfully
         
         System.out.println(db.closeConnection());
+        
+        
     }
 }
