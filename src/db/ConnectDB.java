@@ -5,15 +5,18 @@ package src.db;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
 
 public class ConnectDB {
     private Connection conn;
+    private Statement st = null;
+    private ResultSet rst = null;
     private final String user;
     private final String password;
-    private final String url;
+    private String url;
     
     
     public ConnectDB(String url, String user, String password) {
@@ -30,10 +33,40 @@ public class ConnectDB {
 			e.printStackTrace();
 		}
     }
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+    public Connection getConn() {
+        return conn;
+    }
+    public void setConn(Connection conn) {
+        this.conn = conn;
+    }
+    
+     public Statement getSt() {
+        return st;
+    }
+
+    public void setSt(Statement st) {
+        this.st = st;
+    }
+    
+    public ResultSet getRst() {
+        return rst;
+    }
+
+    public void setRst(ResultSet rst) {
+        this.rst = rst;
+    }
+    
     public boolean openConnection() {
         boolean RESULT = false;
         try {
-            conn = DriverManager.getConnection(this.url, this.user, this.password);
+            setConn(DriverManager.getConnection(this.getUrl(), this.user, this.password));
             RESULT = true;
         }
         catch(SQLException ex) {
@@ -42,6 +75,30 @@ public class ConnectDB {
         }
         return RESULT;
     }
+    public boolean runStatement(String SQLstatement) {
+        
+        try {
+             setSt(this.conn.createStatement());
+             setRst(getSt().executeQuery(SQLstatement));
+        }
+        catch(SQLException ex) {
+            System.out.println("statement running blew up");
+            ex.printStackTrace();
+        }
+        return getRst()!=null;
+    }
+    public boolean closeConnection() {
+        boolean RESULT = false;
+        try {
+            getConn().close();
+            RESULT = true;
+        }
+        catch(SQLException ex) {
+            System.out.println("something blew up while closing connection(s)");
+            ex.printStackTrace();
+        }
+        return RESULT;
+    }
+
     }
     
-}
