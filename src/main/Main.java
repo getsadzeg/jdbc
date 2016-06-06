@@ -1,6 +1,6 @@
 
-package main;
-import db.*;
+package src.main;
+import src.db.*;
 
 public class Main {
     public static void main(String[] args) {
