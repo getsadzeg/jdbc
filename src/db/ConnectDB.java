@@ -1,5 +1,9 @@
 
+<<<<<<< HEAD
 package src.db;
+=======
+package javadb.src.db;
+>>>>>>> origin/master
 
 import java.sql.Connection;
 import java.sql.DriverManager;
