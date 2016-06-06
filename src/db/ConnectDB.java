@@ -11,9 +11,9 @@ import java.sql.Statement;
 
 public class ConnectDB {
     private Connection conn;
-    private String user;
-    private String password;
-    private String url;
+    private final String user;
+    private final String password;
+    private final String url;
     
     
     public ConnectDB(String url, String user, String password) {
@@ -40,4 +40,5 @@ public class ConnectDB {
             ex.printStackTrace();
         }
     }
+    
 }
