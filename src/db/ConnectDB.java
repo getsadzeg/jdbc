@@ -1,5 +1,5 @@
 
-package db;
+package javadb.src.db;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
