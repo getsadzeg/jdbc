@@ -30,15 +30,18 @@ public class ConnectDB {
 			e.printStackTrace();
 		}
     }
-    public void openConnection() {
+    public boolean openConnection() {
+        boolean RESULT = false;
         try {
             conn = DriverManager.getConnection(this.url, this.user, this.password);
-            System.out.println("CONNECTION SUCCESS");
+            RESULT = true;
         }
         catch(SQLException ex) {
             System.out.println("something blew up");
             ex.printStackTrace();
         }
+        return RESULT;
+    }
     }
     
 }
