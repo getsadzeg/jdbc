@@ -14,6 +14,7 @@ public class ConnectDB {
     private Connection conn;
     private Statement st = null;
     private ResultSet rst = null;
+    private int forUpdate = 0;
     private final String user;
     private final String password;
     private String url;
@@ -62,7 +63,15 @@ public class ConnectDB {
     public void setRst(ResultSet rst) {
         this.rst = rst;
     }
-    
+
+    public long getForUpdate() {
+        return forUpdate;
+    }
+
+    public void setForUpdate(int forUpdate) {
+        this.forUpdate = forUpdate;
+    }
+
     public boolean openConnection() {
         boolean RESULT = false;
         try {
@@ -86,6 +95,17 @@ public class ConnectDB {
             ex.printStackTrace();
         }
         return getRst()!=null;
+    }
+    public boolean runUpdate(String SQLstatement) {
+        try {
+            setSt(this.conn.createStatement());
+            setForUpdate(getSt().executeUpdate(SQLstatement));
+        }
+        catch(SQLException ex) {
+            System.out.println("statement running blew up");
+            ex.printStackTrace();
+        }
+        return getForUpdate()!=0;
     }
     public boolean closeConnection() {
         boolean RESULT = false;
@@ -117,5 +137,6 @@ public class ConnectDB {
         }
     }
 
-    }
+
+}
     
