@@ -1,12 +1,11 @@
 
 
 package src.main;
-import java.sql.ResultSet;
-import src.db.*;
+import src.db.ConnectDB;
 
 public class Main {
     public static void main(String[] args) {
-        ConnectDB db = new ConnectDB("jdbc:mysql://192.168.1.2:3306", "root", "root");
+        ConnectDB db = new ConnectDB("jdbc:mysql://107.170.50.225:3306", "root", "lapptech100#");
         System.out.println(db.openConnection());
         
         System.out.println(db.runStatement("SELECT Name, Surname, ID, phoneNumber, Password FROM lake.users"));
