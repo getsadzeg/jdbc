@@ -25,14 +25,23 @@ public class ConnectDB {
         this.user = user;
         this.password = password;
         this.conn = null;
-        //load mysql driver
-        try {
-            Class.forName("com.mysql.jdbc.Driver");
+        if (url.contains("jdbc:mysql")) {
+            try {
+                Class.forName("com.mysql.jdbc.Driver");
+            } catch (ClassNotFoundException e) {
+                System.out.println("MySQL JDBC Driver not found...");
+                e.printStackTrace();
+            }
         }
-        catch (ClassNotFoundException e) {
-			System.out.println("MySQL JDBC Driver not found...");
-			e.printStackTrace();
-		}
+        else if(url.contains("jdbc:postgresql")) {
+            try {
+                Class.forName("org.postgresql.Driver");
+            }
+            catch(ClassNotFoundException e) {
+                System.out.println("PostgreSQL Driver not found...");
+                e.printStackTrace();
+            }
+        }
     }
     public String getUrl() {
         return url;
