@@ -38,7 +38,7 @@ public class ConnectDB {
                 Class.forName("org.postgresql.Driver");
             }
             catch(ClassNotFoundException e) {
-                System.out.println("PostgreSQL Driver not found...");
+                System.out.println("PostgreSQL JDBC Driver not found...");
                 e.printStackTrace();
             }
         }
@@ -88,7 +88,7 @@ public class ConnectDB {
             RESULT = true;
         }
         catch(SQLException ex) {
-            System.out.println("something blew up");
+            System.out.println("something blew up while opening connection");
             ex.printStackTrace();
         }
         return RESULT;
@@ -100,7 +100,7 @@ public class ConnectDB {
              setRst(getSt().executeQuery(SQLstatement));
         }
         catch(SQLException ex) {
-            System.out.println("statement running blew up");
+            System.out.println("something blew up while running statement");
             ex.printStackTrace();
         }
         return getRst()!=null;
@@ -111,7 +111,7 @@ public class ConnectDB {
             setForUpdate(getSt().executeUpdate(SQLstatement));
         }
         catch(SQLException ex) {
-            System.out.println("statement running blew up");
+            System.out.println("something blew up while running update statement");
             ex.printStackTrace();
         }
         return getForUpdate()!=0;
